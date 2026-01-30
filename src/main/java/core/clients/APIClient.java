@@ -61,12 +61,15 @@ public class APIClient {
                 .response();
     }
 
-    public Response getBookingById() {
+    //Методы должен быть универсальным, так чтобы можно было легко искать бронирование по любому номер
+    public Response getBookingById(int id) {
         return getRequestSpec()
                 .when()
-                .get(ApiEndpoints.BOOKING.getPath() + "/1")
+                .get(ApiEndpoints.BOOKING.getPath() + "/" + id)
                 .then()
                 .statusCode(200)
+                .log()
+                .all()
                 .extract()
                 .response();
     }

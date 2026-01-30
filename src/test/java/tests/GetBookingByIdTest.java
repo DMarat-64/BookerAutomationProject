@@ -1,15 +1,12 @@
 package tests;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.clients.APIClient;
-import core.models.BookingById;
+import core.models.CreatedBooking;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,7 +14,7 @@ public class GetBookingByIdTest {
 
     private APIClient apiClient;
     private ObjectMapper objectMapper;
-   // private
+    private CreatedBooking createdBooking;
 
     @BeforeEach
     public void setup() {
@@ -27,18 +24,13 @@ public class GetBookingByIdTest {
 
     @Test
     public void testGetBookingById() throws JsonProcessingException {
-        Response response = apiClient.getBookingById();
+        Response response = apiClient.getBookingById(1);
 
         assertThat(response.getStatusCode()).isEqualTo(200);
 
-      /* String responseBody = response.getBody().asString();
-        List<BookingById> bookingByIds = objectMapper.readValue(responseBody, new TypeReference<List<BookingById>>() {});
+        String responseBody = response.getBody().asString();
+        createdBooking = objectMapper.readValue(responseBody, CreatedBooking.class);
 
-        assertThat(bookingByIds).isNotEmpty();
-
-        for (BookingById bookingById : bookingByIds) {
-            assertThat(bookingById).isNotNull();
-           assertThat(bookingById.getTotalprice()).isGreaterThan(0);
-        }*/
+        assertThat(createdBooking).isNotNull();
     }
 }

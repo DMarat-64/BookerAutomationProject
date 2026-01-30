@@ -24,7 +24,7 @@ public class GetBookingByIdTest {
 
     @Test
     public void testGetBookingById() throws JsonProcessingException {
-        Response response = apiClient.getBookingById(1);
+        Response response = apiClient.getBookingById(26);
 
         assertThat(response.getStatusCode()).isEqualTo(200);
 

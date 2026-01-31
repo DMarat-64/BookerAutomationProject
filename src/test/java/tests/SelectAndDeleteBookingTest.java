@@ -28,35 +28,26 @@ public class SelectAndDeleteBookingTest {
     }
 
     @Test
-    public void testGetBookingIds() throws JsonProcessingException {
+    public void testSelectAndDeleteBookingTest() throws JsonProcessingException {
         Response response = apiClient.getBooking();
-
         assertThat(response.getStatusCode()).isEqualTo(200);
-
         String responseBody = response.getBody().asString();
         List<Booking> bookings = objectMapper.readValue(responseBody, new TypeReference<List<Booking>>() {});
 
         assertThat(bookings).isNotEmpty();
-
         for (Booking booking : bookings) {
             assertThat(booking.getBookingid()).isGreaterThan(0);
         }
-    }
 
-    @Test
-    public void testDeleteBookingIds() {
-
+        Booking firstBookingId = bookings.getFirst();
+        int bookingId = firstBookingId.getBookingid();
+        assertThat(bookingId).isGreaterThan(0);
         apiClient.createToken("admin", "password123");
 
-        Response response = apiClient.deleteBooking(26);
+        Response deleteBookingId = apiClient.deleteBooking(bookingId);
+        assertThat(deleteBookingId.getStatusCode()).isEqualTo(201);
 
-        assertThat(response.getStatusCode()).isEqualTo(201);
-    }
-
-    @Test
-    public void testGetBooking() {
-        Response response = apiClient.getDeleteBookingId(26);
-
-        assertThat(response.getStatusCode()).isEqualTo(404);
+        Response getDeleteBookingId = apiClient.getDeleteBookingId(bookingId);
+        assertThat(getDeleteBookingId.getStatusCode()).isEqualTo(404);
     }
 }

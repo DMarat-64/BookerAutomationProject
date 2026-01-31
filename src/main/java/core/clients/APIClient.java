@@ -48,7 +48,7 @@ public class APIClient {
     }
 
     public void createToken(String username, String password) {
-        String requestBody = String.format("{ \"username\": \"$s\", \"password\": \"$s\" }", username, password);
+        String requestBody = String.format("{ \"username\": \"%s\", \"password\": \"%s\" }", username, password);
 
         Response response = getRequestSpec()
                 .body(requestBody)
@@ -88,6 +88,7 @@ public class APIClient {
                 .get(ApiEndpoints.BOOKING.getPath())
                 .then()
                 .statusCode(200)
+                .log().all()
                 .extract()
                 .response();
     }
@@ -98,8 +99,18 @@ public class APIClient {
                 .get(ApiEndpoints.BOOKING.getPath() + "/" + id)
                 .then()
                 .statusCode(200)
-                .log()
-                .all()
+                .log().all()
+                .extract()
+                .response();
+    }
+
+    public Response getDeleteBookingId(int id) {
+        return getRequestSpec()
+                .when()
+                .get(ApiEndpoints.BOOKING.getPath() + "/" + id)
+                .then()
+                .statusCode(404)
+                .log().all()
                 .extract()
                 .response();
     }
@@ -111,7 +122,7 @@ public class APIClient {
                 .delete(ApiEndpoints.BOOKING.getPath() + "/{id}")
                 .then()
                 .log().all()
-                .statusCode(200)
+                .statusCode(201)
                 .extract()
                 .response();
     }

@@ -3,7 +3,7 @@ package tests;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.clients.APIClient;
-import core.models.CreatedBooking;
+import core.models.CreateBooking;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ public class GetBookingByIdTest {
 
     private APIClient apiClient;
     private ObjectMapper objectMapper;
-    private CreatedBooking createdBooking;
+    private CreateBooking createdBooking;
 
     @BeforeEach
     public void setup() {
@@ -29,7 +29,7 @@ public class GetBookingByIdTest {
         assertThat(response.getStatusCode()).isEqualTo(200);
 
         String responseBody = response.getBody().asString();
-        createdBooking = objectMapper.readValue(responseBody, CreatedBooking.class);
+        createdBooking = objectMapper.readValue(responseBody, CreateBooking.class);
 
         assertThat(createdBooking).isNotNull();
     }

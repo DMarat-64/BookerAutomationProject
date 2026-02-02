@@ -1,17 +1,17 @@
 package core.models;
 
-public class CreatedBooking {
+public class CreateBooking {
     public String firstname;
     public String lastname;
     public int totalprice;
     public boolean depositpaid;
-    public Bookingdates bookingdates;
+    public BookingDates bookingdates;
     public String additionalneeds;
 
-    public CreatedBooking() {}
+    public CreateBooking() {}
 
-    public CreatedBooking(String firstname, String lastname, int totalprice, boolean depositpaid,
-                          Bookingdates bookingdates, String additionalneeds) {
+    public CreateBooking(String firstname, String lastname, int totalprice, boolean depositpaid,
+                         BookingDates bookingdates, String additionalneeds) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.totalprice = totalprice;
@@ -60,32 +60,11 @@ public class CreatedBooking {
         this.additionalneeds = additionalneeds;
     }
 
-    public Bookingdates getBookingdates() {
+    public BookingDates getBookingdates() {
         return bookingdates;
     }
 
-    public void setBookingdates(Bookingdates bookingdates) {
+    public void setBookingdates(BookingDates bookingdates) {
         this.bookingdates = bookingdates;
-    }
-
-    public class Bookingdates{
-        public String checkin;
-        public String checkout;
-
-        public String getCheckin() {
-            return checkin;
-        }
-
-        public void setCheckin(String checkin) {
-            this.checkin = checkin;
-        }
-
-        public String getCheckout() {
-            return checkout;
-        }
-
-        public void setCheckout(String checkout) {
-            this.checkout = checkout;
-        }
     }
 }

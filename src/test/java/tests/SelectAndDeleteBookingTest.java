@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.clients.APIClient;
 import core.models.Booking;
-import core.models.CreatedBooking;
+import core.models.CreateBooking;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ public class SelectAndDeleteBookingTest {
 
     private APIClient apiClient;
     private ObjectMapper objectMapper;
-    private CreatedBooking createdBooking;
+    private CreateBooking createdBooking;
 
     @BeforeEach
     public void setup() {
